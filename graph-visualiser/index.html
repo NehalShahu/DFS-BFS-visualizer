@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graph Traversal Visualizer — BFS & DFS</title>
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- LEFT: Canvas -->
+    <div class="left">
+      <!-- Mode toolbar (floats on canvas) -->
+      <div class="modebar">
+        <button id="mode-add-node" class="primary" title="Click to add nodes (N)">Add Node</button>
+        <button id="mode-add-edge" class="ghost"   title="Drag from a node to another to add edge (E)">Add Edge</button>
+        <button id="mode-move"     class="ghost"   title="Drag nodes to move (M)">Move</button>
+        <button id="mode-delete"   class="ghost"   title="Click node/edge to delete (Del)">Delete</button>
+      </div>
+      <div id="tooltip"></div>
+      <!-- p5 canvas mounts here -->
+    </div>
+
+    <!-- RIGHT: Controls + Logs -->
+    <div class="right">
+      <div class="controls">
+        <div class="group">
+          <label for="startSelect">Start:</label>
+          <select id="startSelect"></select>
+        </div>
+
+        <div class="group">
+          <label><input type="radio" name="algo" value="bfs" checked> BFS</label>
+          <label><input type="radio" name="algo" value="dfs"> DFS</label>
+        </div>
+
+        <div class="group">
+          <button id="btn-play"  class="primary">Play</button>
+          <button id="btn-pause">Pause</button>
+          <button id="btn-step"  class="ghost">Step</button>
+          <button id="btn-reset" class="ghost">Reset</button>
+        </div>
+
+        <div class="group">
+          <label for="speed">Speed:</label>
+          <input type="range" id="speed" min="80" max="1200" step="20" value="420">
+          <span id="speedLabel">420ms</span>
+        </div>
+
+        <div class="group">
+          <button id="btn-sample" class="ghost">Random Graph</button>
+          <button id="btn-clear"  class="ghost">Clear</button>
+        </div>
+
+        <div class="group">
+          <button id="btn-fit"    class="ghost">Fit</button>
+          <button id="btn-zoom-in" class="ghost">+</button>
+          <button id="btn-zoom-out" class="ghost">−</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="legend">
+          <span><span class="dot" style="background: var(--frontier);"></span>Frontier</span>
+          <span><span class="dot" style="background: var(--visited);"></span>Visited</span>
+          <span><span class="dot" style="background: var(--current);"></span>Current</span>
+          <span><span class="dot" style="background: var(--accent);"></span>Tree Edge</span>
+        </div>
+
+        <div class="stackqueue">
+          <div>
+            <h3 id="sqLabel">Queue (BFS)</h3>
+            <div id="sq" class="sq"></div>
+          </div>
+          <div>
+            <h3>Visited Order</h3>
+            <div id="visitedLog" class="log"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Tips: Add nodes (N), add edges (E), move (M), delete (Del).  
+        Drag from one node to another in “Add Edge” mode.  
+        Pan: hold <b>Space</b> and drag • Zoom: wheel/trackpad • Fit: button or <b>F</b>.
+      </div>
+    </div>
+  </div>
+
+  <!-- App script -->
+  <script src="script.js"></script>
+</body>
+</html>
